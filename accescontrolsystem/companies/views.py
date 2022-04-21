@@ -9,6 +9,9 @@ from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView,TemplateView
 
 
+# Models
+from users.models import User
+
 
 class CreateCompanyView(FormView):
     """Company register view"""
@@ -20,6 +23,12 @@ class CreateCompanyView(FormView):
         """Save form data"""
         form.save()
         return super().form_valid(form)
+    
+    def get_form(self):
+        form = super().get_form(self.form_class)
+        form.fields['administrator'].queryset = User.objects.filter(role = 'user' )
+        return form
+
 
 
 class CreateAccesPointView(FormView):

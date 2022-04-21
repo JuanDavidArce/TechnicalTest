@@ -28,7 +28,7 @@ class User(AbstractUser):
     country = models.CharField(max_length = 50)
     state = models.CharField(max_length = 50)
     city = models.CharField(max_length = 50)
-    role = models.CharField(max_length = 50)
+    role = models.CharField(max_length = 50,default='user')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS =['role','first_name','last_name']

@@ -28,4 +28,8 @@ class CreateView(FormView):
 class LoginView(auth_views.LoginView):
     """Login view"""
     template_name='users/login.html'
+    success_url=reverse_lazy('users:create')
+
+    
+    
 
