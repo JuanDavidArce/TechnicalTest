@@ -1,29 +1,37 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row justify-content-center">
+        <h1>Update Acces point</h1>
+    </div>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button  type="submit" value="save">Actualizar</button>
+    <div class="row justify-content-center">
+        <form method="POST">
+            {% csrf_token %}
+            <table>
 
-    </form>
-
-    {% for schedule in schedules %}
-
-            {{ schedule.user }} {{ schedule.start_time }} {{ schedule.ending_time }} <a href="{% url 'companies:detailschedule' schedule.pk %}">Details</a> 
-            <a href="{% url 'companies:updateschedule' schedule.pk %}">Update</a>
-            <a href="{% url 'companies:deleteschedule' schedule.pk %}">Delete</a> <br>
-     
-
-    {% endfor %}
+                {{ form.as_table }}
+            </table>
+            <button  type="submit" value="save">Actualizar</button>
     
-</body>
-</html>
+        </form>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+        <h1>Update Schedules</h1>
+    </div>
+    <div class="row justify-content-center alert alert-secondary">
+        {% for schedule in schedules %}
+            <div class="col">{{ schedule.user }}</div>
+            <div class="col"> From <strong>{{ schedule.start_time }}</strong></div>
+            <div class="col">To <strong>{{ schedule.ending_time }}</strong></div>
+            <div class="col"><a href="{% url 'companies:updateschedule' schedule.pk %}">Update</a></div>
+            <div class="col"><a href="{% url 'companies:deleteschedule' schedule.pk %}">Delete</a></div>
+            <br>
+              
+        {% endfor %}
+    </div>
+    
+{% endblock %}
+
+
+    

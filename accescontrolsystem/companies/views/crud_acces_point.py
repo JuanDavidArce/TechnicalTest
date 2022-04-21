@@ -22,7 +22,7 @@ class CreateAccesPointView(LoginRequiredMixin,FormView):
     """Company register view"""
     template_name='acces_points/create.html'
     form_class=CreateAccesPointForm
-    success_url=reverse_lazy('companies:create_acces_point')
+    success_url=reverse_lazy('users:indexadministrator')
 
     def form_valid(self, form):
         """Save form data"""

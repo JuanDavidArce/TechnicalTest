@@ -39,7 +39,7 @@ class CreateScheduleView(LoginRequiredMixin,FormView):
     """Schedule register view"""
     template_name='schedules/create.html'
     form_class=CreateScheduleForm
-    success_url=reverse_lazy('companies:create_schedule')
+    success_url=reverse_lazy('users:indexadministrator')
 
     def form_valid(self, form):
         """Save form data"""
