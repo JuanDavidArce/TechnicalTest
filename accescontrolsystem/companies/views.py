@@ -1,6 +1,7 @@
 """Companies views"""
 
 # Forms
+import pdb
 from companies.forms import  CreateCompanyForm,CreateAccesPointForm, CreateScheduleForm
 
 
@@ -12,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Models
 from users.models import User
+from companies.models import Company
 
 
 class CreateCompanyView(LoginRequiredMixin,FormView):
@@ -40,7 +42,7 @@ class CreateAccesPointView(LoginRequiredMixin,FormView):
 
     def form_valid(self, form):
         """Save form data"""
-        form.save()
+        form.save(company=Company.objects.get(administrator = self.request.user))
         return super().form_valid(form)
 
 

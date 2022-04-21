@@ -5,7 +5,7 @@ from django.urls import path
 
 
 # Views 
-from users.views import CreateView,LoginView,LogoutView
+from users.views import CreateView,LoginView,LogoutView,IndexUserRootView
 
 app_name = 'users'
 urlpatterns = [
@@ -20,4 +20,10 @@ urlpatterns = [
     path('logout/',
     LogoutView.as_view(),
         name='logout'),
+    
+    path('indexroot/',
+    IndexUserRootView.as_view(),
+        name='indexroot'),
+
+    
 ]

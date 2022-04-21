@@ -31,9 +31,20 @@ class CreateView(LoginRequiredMixin,FormView):
 class LoginView(auth_views.LoginView):
     """Login view"""
     template_name='users/login.html'
-    success_url=reverse_lazy('users:create')
+
+    def get_success_url(self) -> str:
+        if self.request.user.role == 'root':
+            return reverse('users:indexroot')
+        elif self.request.user.role == 'administrator':
+            return reverse('companies:create_acces_point')
+        
 
     
 class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
     """Logout View"""
+
+class IndexUserRootView(TemplateView):
+    """Index root"""
+    template_name='users/index_root.html'
+
 

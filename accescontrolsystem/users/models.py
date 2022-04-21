@@ -31,7 +31,7 @@ class User(AbstractUser):
     role = models.CharField(max_length = 50,default='user')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS =['role','first_name','last_name']
+    REQUIRED_FIELDS =['role','first_name','last_name','username']
 
 
     def __str__(self):

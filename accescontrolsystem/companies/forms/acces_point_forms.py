@@ -15,8 +15,9 @@ class CreateAccesPointForm(forms.ModelForm):
         exclude = ['company']
 
     
-    def save(self):
+    def save(self,**kwargs):
         # CHECK TO ASSING COMPANY
         """Create Acces point."""
         data = self.cleaned_data
+        data['company'] = kwargs['company']
         AccesPoint.objects.create(**data)
