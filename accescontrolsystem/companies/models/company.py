@@ -1,4 +1,4 @@
-"""Companies models"""
+"""Company model"""
 
 
 # Django
