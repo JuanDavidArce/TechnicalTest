@@ -1,6 +1,7 @@
 """Users views"""
 
 # Forms
+from pyexpat import model
 from users.forms import  CreateForm
 
 
@@ -11,9 +12,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
-
-
+# Models
+from users.models import User
 
 # Create your views here.
 class CreateView(LoginRequiredMixin,FormView):
@@ -24,7 +24,6 @@ class CreateView(LoginRequiredMixin,FormView):
 
     def form_valid(self, form):
         """Save form data"""
-        form.save()
         return super().form_valid(form)
 
 
@@ -43,8 +42,18 @@ class LoginView(auth_views.LoginView):
 class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
     """Logout View"""
 
+
 class IndexUserRootView(TemplateView):
     """Index root"""
     template_name='users/index_root.html'
 
 
+class ManageUsersView(TemplateView):
+    """Index root"""
+    template_name='users/manage.html'
+
+
+class DetailUserView(DetailView):
+    """Detail user view"""
+    model = User
+    template_name='users/detail.html'

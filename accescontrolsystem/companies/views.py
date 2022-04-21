@@ -56,3 +56,9 @@ class CreateScheduleView(LoginRequiredMixin,FormView):
         """Save form data"""
         form.save()
         return super().form_valid(form)
+
+class ManageCompaniesView(TemplateView):
+    """Manage companies view"""
+    template_name='companies/manage.html'
+
+

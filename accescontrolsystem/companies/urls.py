@@ -5,7 +5,10 @@ from django.urls import path
 
 
 # Views 
-from companies.views import CreateCompanyView, CreateAccesPointView, CreateScheduleView
+from companies.views import (CreateCompanyView, 
+                            CreateAccesPointView, 
+                            CreateScheduleView,
+                            ManageCompaniesView)
 
 app_name = 'companies'
 urlpatterns = [
@@ -19,5 +22,9 @@ urlpatterns = [
 
     path('accespoint/schedule/create',
     CreateScheduleView.as_view(),
-    name = 'create_schedule')
+    name = 'create_schedule'),
+
+    path('manage',
+    ManageCompaniesView.as_view(),
+    name = 'manage'),
 ]

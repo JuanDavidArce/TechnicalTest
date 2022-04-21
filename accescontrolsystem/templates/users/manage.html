@@ -7,15 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    
+
     {% if request.user.role == 'root' %}
-        <a href="{% url 'users:manage' %}">Manage users</a> <br>
-        <a href="{% url 'companies:manage' %}">Manage companies</a>
+        <a href="{% url 'users:create' %}">Create an User</a> <br>
+        <a href="">Delete an user</a> <br>
+        <a href="">View a user</a> <br>
+        <a href="">Update a user</a> <br>
+        <a href="">List of users</a> <br>
     {% else %}
         <p>
             Acces denied
         </p>
     {% endif %}
-
+    
 </body>
 </html>
