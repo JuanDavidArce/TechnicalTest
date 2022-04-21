@@ -6,7 +6,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 
-
 class User(AbstractUser):
     """User model 
     Extend from djangos's abstract user, change the username field 
