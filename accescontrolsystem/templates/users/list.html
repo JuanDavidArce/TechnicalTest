@@ -18,9 +18,9 @@
                 <table style="width:50%">
                     <tr>
                         <th>{{ user.first_name }} {{ user.last_name }}</th>
-                        <td><a href="{% url 'users:detail' user.pk %}">Details</a></td>
-                        <td><a href="{% url 'users:update' user.pk %}">Update</a> </td>
-                        <td> <a href="{% url 'users:delete' user.pk %}">Delete</a> </td>
+                        <td><a href="{% url 'users:detail' user.pk %}" class="btn-success">Details</a></td>
+                        <td><a href="{% url 'users:update' user.pk %}" class="btn-success">Update</a> </td>
+                        <td> <a href="{% url 'users:delete' user.pk %}" class="btn-success">Delete</a> </td>
                     </tr>
                 </table>
                 

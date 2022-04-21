@@ -1,20 +1,18 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row justify-content-center">
+        <h1>Create acces point</h1>
+    </div>
+    <div class="row justify-content-center">
+        
+        <form action="{% url 'companies:create_acces_point' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button  type="submit" class="btn-dark">Register!</button>
 
-    <form action="{% url 'companies:create_acces_point' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button  type="submit">Registrarse!</button>
-
-    </form>
+        </form>
+    </div>
+{% endblock %}
     
-</body>
-</html>

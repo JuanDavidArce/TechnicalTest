@@ -38,6 +38,9 @@ class LoginView(auth_views.LoginView):
             return reverse('users:indexroot')
         elif self.request.user.role == 'administrator':
             return reverse('users:indexadministrator')
+        else:
+            return reverse('users:login')
+
         
 
     
