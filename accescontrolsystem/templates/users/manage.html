@@ -11,7 +11,7 @@
     {% if request.user.role == 'root' %}
         <a href="{% url 'users:create' %}">Create an User</a> <br>
         <a href="">Delete an user</a> <br>
-        <a href="">View a user</a> <br>
+        <a href="{% url 'users:detail' 1 %}">View a user</a> <br>
         <a href="">Update a user</a> <br>
         <a href="">List of users</a> <br>
     {% else %}

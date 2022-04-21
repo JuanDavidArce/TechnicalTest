@@ -9,7 +9,8 @@ from users.views import (CreateView,
                         LoginView,
                         LogoutView,
                         IndexUserRootView,
-                        ManageUsersView)
+                        ManageUsersView,
+                        DetailUserView)
 
 app_name = 'users'
 urlpatterns = [
@@ -18,8 +19,8 @@ urlpatterns = [
     name = 'create'),
 
     path('detail/<int:pk>/',
-    CreateView.as_view(),
-    name = 'create'),
+    DetailUserView.as_view(),
+    name = 'detail'),
 
     path('login/',
     LoginView.as_view(),
