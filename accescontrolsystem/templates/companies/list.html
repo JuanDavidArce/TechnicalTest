@@ -1,18 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% if request.user.role == 'root' %}
-        {% for company in companies %}
+{% extends 'base.html' %}
+{% block content %}
 
-            {{ company.name }} <a href="{% url 'companies:detail' company.pk %}">Details</a> 
-            <a href="{% url 'companies:update' company.pk %}">Update</a>
-            <a href="{% url 'companies:delete' company.pk %}">Delete</a> <br>
+    <style>
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
+    {% if request.user.role == 'root' %}
+
+        <div class="row justify-content-center">
+            <h1>List of companies</h1>
+        </div>
+        <br>
+
+        {% for company in companies %}
+            <div class="row justify-content-center">
+                <table style="width:50%">
+                    <tr>
+                        <th>{{ company.name }}</th>
+                        <td><a href="{% url 'companies:detail' company.pk %}">Details</a> </td>
+                        <td><a href="{% url 'companies:update' company.pk %}">Update</a> </td>
+                        <td> <a href="{% url 'companies:delete' company.pk %}">Delete</a></td>
+                    </tr>
+                </table>
+                
+    
+            </div>
 
         {% endfor %}
     {% else %}
@@ -20,6 +33,5 @@
             Acces denied
         </p>
     {% endif %}
-    
-</body>
-</html>
+
+{% endblock %}
