@@ -9,6 +9,7 @@ from companies.forms import  CreateCompanyForm,CreateAccesPointForm, CreateSched
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from companies.models.accespoint import AccesPoint
 
 
 # Models
@@ -32,8 +33,6 @@ class CreateCompanyView(LoginRequiredMixin,FormView):
         return form
     
 
-
-
 class CreateAccesPointView(LoginRequiredMixin,FormView):
     """Company register view"""
     template_name='acces_points/create.html'
@@ -44,6 +43,31 @@ class CreateAccesPointView(LoginRequiredMixin,FormView):
         """Save form data"""
         form.save(company=Company.objects.get(administrator = self.request.user))
         return super().form_valid(form)
+
+class DetailAccesPointView(LoginRequiredMixin,DetailView):
+    """Detail acces point"""
+    model = AccesPoint
+    template_name='acces_points/detail.html'
+
+
+class UpdateAccesPointView(LoginRequiredMixin,UpdateView):
+    """Update acces point"""
+    template_name='acces_points/update.html'
+    model = AccesPoint
+    fields = ['name', 'address','email', 'geolocation', 'is_active']
+    
+    def get_success_url(self):
+        """Return to users detail"""
+        pk=self.get_object().pk
+        return reverse('companies:detailaccespoint',kwargs={'pk':pk})
+    
+class DeleteAccesPointView(DeleteView,LoginRequiredMixin):
+    """Delete Company"""
+    model= AccesPoint
+    success_url= reverse_lazy('users:indexadministrator')
+   
+
+
 
 
 class CreateScheduleView(LoginRequiredMixin,FormView):

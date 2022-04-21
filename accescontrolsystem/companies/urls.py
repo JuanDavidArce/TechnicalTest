@@ -12,7 +12,10 @@ from companies.views import (CreateCompanyView,
                             DetailCompanyView,
                             UpdateCompanyView,
                             DeleteCompanyView,
-                            ListCompaniesView)
+                            ListCompaniesView,
+                            DeleteAccesPointView,
+                            DetailAccesPointView,
+                            UpdateAccesPointView)
 
 app_name = 'companies'
 urlpatterns = [
@@ -46,4 +49,16 @@ urlpatterns = [
     path('manage',
     ManageCompaniesView.as_view(),
     name = 'manage'),
+
+    path('<int:pk>/accespoint/detail/',
+    DetailAccesPointView.as_view(),
+    name = 'detailaccespoint'),
+
+    path('<int:pk>/accespoint/update/',
+    UpdateAccesPointView.as_view(),
+    name = 'updateaccespoint'),
+
+    path('<int:pk>/accespoint/delete/',
+    DeleteAccesPointView.as_view(),
+    name = 'deleteaccespoint'),
 ]

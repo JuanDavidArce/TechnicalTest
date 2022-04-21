@@ -14,6 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Models
 from users.models import User
+from companies.models import AccesPoint, company
 
 # Create your views here.
 class CreateView(LoginRequiredMixin,FormView):
@@ -48,9 +49,16 @@ class IndexUserRootView(LoginRequiredMixin,TemplateView):
     """Index root"""
     template_name='users/index_root.html'
 
-class IndexAdministratorView(LoginRequiredMixin,TemplateView):
+class IndexAdministratorView(LoginRequiredMixin,ListView):
     """Index administrator"""
     template_name='users/index_admin.html'
+    Model= AccesPoint
+    context_object_name='accespoints'
+    paginate_by = 3
+    def get_queryset(self):
+        return AccesPoint.objects.filter(company__administrator = self.request.user)
+
+
 
 
 class ManageUsersView(LoginRequiredMixin,TemplateView):
