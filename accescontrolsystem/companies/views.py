@@ -2,7 +2,7 @@
 
 # Forms
 import pdb
-from companies.forms import  CreateCompanyForm,CreateAccesPointForm, CreateScheduleForm
+from companies.forms import  CreateCompanyForm,CreateAccesPointForm, CreateScheduleForm,UpdateCompanyForm
 
 
 # Django
@@ -26,6 +26,10 @@ class CreateCompanyView(LoginRequiredMixin,FormView):
         """Save form data"""
         form.save()
         return super().form_valid(form)
+    def get_form(self):
+        form = super().get_form(self.form_class)
+        form.fields['administrator'].queryset = User.objects.filter(role = 'user' )
+        return form
     
 
 
@@ -78,15 +82,25 @@ class UpdateCompanyView(LoginRequiredMixin,UpdateView):
     """Update Company"""
     template_name='companies/update.html'
     model = Company
-    fields='__all__'
-
+    form_class = UpdateCompanyForm
+    
     def get_success_url(self):
         """Return to users detail"""
-        pk=self.object.pk
+        pk=self.get_object().pk
         return reverse('companies:detail',kwargs={'pk':pk})
+    
+    def get_form(self):
+        form = super().get_form(self.form_class)
+        form.fields['administrator'].queryset = User.objects.filter(role = 'user') 
+        if self.get_object().administrator:
+            form.fields['administrator'].queryset = User.objects.filter(role = 'user') | User.objects.filter(pk=self.get_object().administrator.pk)
+        return form
+    
+    def form_valid(self, form):
+        """Save form data"""
+        form.save(pk=self.get_object().pk,administrator = self.get_object().administrator)
+        return super().form_valid(form)
 
-    def dispatch(self, request, *args, **kwargs) :
-        return super().dispatch(request, *args, **kwargs)
 
 class DeleteCompanyView(DeleteView,LoginRequiredMixin):
     """Delete Company"""

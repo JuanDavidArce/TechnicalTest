@@ -24,3 +24,30 @@ class CreateCompanyForm(forms.ModelForm):
             user.role = 'administrator'
             user.save()
         Company.objects.create(**data)
+        
+class UpdateCompanyForm(forms.ModelForm):
+    """Create form"""
+
+    class Meta:
+        model = Company
+        fields = '__all__'
+
+    def save(self,**kwargs):
+        """Update Company."""
+        data = self.cleaned_data
+        if data['administrator']:
+            user = User.objects.get(pk = data['administrator'].pk)
+            user.role = 'administrator'
+            user.save()
+        else:
+            if kwargs.get('administrator',False):
+                administrator = kwargs['administrator']
+                administrator.role = 'user'
+                administrator.save()
+        if kwargs.get('pk',False):
+            company = Company.objects.filter(pk = kwargs['pk'])
+            company.update(**data)
+    
+
+ 
+

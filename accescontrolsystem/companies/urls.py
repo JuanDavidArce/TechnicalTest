@@ -31,7 +31,7 @@ urlpatterns = [
     DeleteCompanyView.as_view(),
     name = 'delete'),
 
-    path('listcomapanies/',
+    path('listcompanies/',
     ListCompaniesView.as_view(),
         name='list'),
 

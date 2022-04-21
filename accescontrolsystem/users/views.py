@@ -24,6 +24,7 @@ class CreateView(LoginRequiredMixin,FormView):
 
     def form_valid(self, form):
         """Save form data"""
+        form.save()
         return super().form_valid(form)
 
 
