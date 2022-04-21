@@ -1,20 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% if request.user.role == 'root' %}
-        {% for user in users %}
+{% extends 'base.html' %}
+{% block content %}
 
-            {{ user.first_name }} {{ user.last_name }} <a href="{% url 'users:detail' user.pk %}">Details</a> 
-            <a href="{% url 'users:update' user.pk %}">Update</a>
-            {% if user.role != 'root' %}
-                <a href="{% url 'users:delete' user.pk %}">Delete</a> 
-            {% endif %}<br>
+    <style>
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
+    {% if request.user.role == 'root' %}
+
+        <div class="row justify-content-center">
+            <h1>List of Users</h1>
+        </div>
+        <br>
+
+        {% for user in users %}
+            <div class="row justify-content-center">
+                <table style="width:50%">
+                    <tr>
+                        <th>{{ user.first_name }} {{ user.last_name }}</th>
+                        <td><a href="{% url 'users:detail' user.pk %}">Details</a></td>
+                        <td><a href="{% url 'users:update' user.pk %}">Update</a> </td>
+                        <td> <a href="{% url 'users:delete' user.pk %}">Delete</a> </td>
+                    </tr>
+                </table>
+                
+    
+            </div>
 
         {% endfor %}
     {% else %}
@@ -22,6 +33,5 @@
             Acces denied
         </p>
     {% endif %}
-    
-</body>
-</html>
+
+{% endblock %}
