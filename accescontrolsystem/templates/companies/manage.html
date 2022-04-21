@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 
-    {% if request.user.role == 'root' %}
-        <a href="{% url 'companies:create' %}">Create Company</a> <br>
-        <a href="{% url 'companies:list' %}">List of companies</a> <br>
-    {% else %}
-        <p>
-            Acces denied
-        </p>
-    {% endif %}
+    {% extends 'base.html' %}
+    {% block content %}
+        {% if request.user.role == 'root' %}
+            <div class="row justify-content-center">
+                <h1>Manage Comanies</h1>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-light"> <a href="{% url 'companies:create' %}">Create Company</a></button>
+                <button type="button" class="btn btn-light"> <a href="{% url 'companies:list' %}">List of companies</a> </button>
+            </div>
     
-</body>
-</html>
+        {% else %}
+            <p>
+                Acces denied
+            </p>
+        {% endif %}
+    {% endblock %}
+    
+        
+    
