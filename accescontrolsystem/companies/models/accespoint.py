@@ -16,3 +16,7 @@ class AccesPoint(models.Model):
 
     geolocation = models.CharField(max_length = 250)
     is_active = models.BooleanField(default = True)
+
+    def __str__(self):
+        return self.name
+        

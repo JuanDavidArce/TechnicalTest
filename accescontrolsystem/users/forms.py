@@ -7,8 +7,8 @@ import django.forms as forms
 from users.models import User
 
 
-class RegisterForm(forms.ModelForm):
-    """Signup form"""
+class CreateForm(forms.ModelForm):
+    """Create form"""
 
     password_confirmation = forms.CharField(max_length=50)
     class Meta:

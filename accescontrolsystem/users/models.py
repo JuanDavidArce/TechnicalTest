@@ -33,3 +33,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS =['role','first_name','last_name']
 
+
+    def __str__(self):
+        return self.first_name + ' '+ self.last_name
+

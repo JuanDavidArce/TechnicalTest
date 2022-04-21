@@ -9,7 +9,7 @@ from django.core.validators import RegexValidator
 class Schedule(models.Model):
     """Schedule model"""
 
-    acces_point = models.ForeignKey('companies.Schedule',
+    acces_point = models.ForeignKey('companies.AccesPoint',
                                     related_name = 'schedules_acces_point',
                                     on_delete = models.CASCADE)
 
