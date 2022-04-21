@@ -88,7 +88,7 @@ _Una vez construido nuestro entorno vamos a proceder a ejecutarlo con el siguien
 	* sudo docker-compose up -d
 ```
 
-_Es importante mencionar que debemos crear nuestro usuario root, lo cual lo hacemos moviendonos hasta el sitio donde esta el archivo docker-compose.yml, en nuestra terminal.una vez hecho esto escribimos el siguinete comando:_
+_Es importante mencionar que debemos crear nuestro usuario root, lo cual lo hacemos moviendonos hasta el sitio donde esta el archivo docker-compose.yml, en nuestra terminal.una vez hecho esto escribimos el siguinete comando(role = root):_
 
 ```
 -Windows y Mac:
