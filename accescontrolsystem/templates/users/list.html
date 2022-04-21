@@ -7,10 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-
     {% if request.user.role == 'root' %}
-        <a href="{% url 'companies:create' %}">Create Company</a> <br>
-        <a href="{% url 'companies:list' %}">List of companies</a> <br>
+        {% for user in users %}
+
+            {{ user.first_name }} {{ user.last_name }} <a href="{% url 'users:detail' user.pk %}">Details</a> 
+            <a href="{% url 'users:update' user.pk %}">Update</a>
+            {% if user.role != 'root' %}
+                <a href="{% url 'users:delete' user.pk %}">Delete</a> 
+            {% endif %}<br>
+
+        {% endfor %}
     {% else %}
         <p>
             Acces denied

@@ -43,17 +43,42 @@ class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
     """Logout View"""
 
 
-class IndexUserRootView(TemplateView):
+class IndexUserRootView(LoginRequiredMixin,TemplateView):
     """Index root"""
     template_name='users/index_root.html'
 
 
-class ManageUsersView(TemplateView):
+class ManageUsersView(LoginRequiredMixin,TemplateView):
     """Index root"""
     template_name='users/manage.html'
 
 
-class DetailUserView(DetailView):
+class DetailUserView(LoginRequiredMixin,DetailView):
     """Detail user view"""
     model = User
     template_name='users/detail.html'
+
+
+class ListUsersView(LoginRequiredMixin,ListView):
+    """List of users"""
+    template_name= 'users/list.html'
+    Model= User
+    context_object_name='users'
+    def get_queryset(self):
+        return User.objects.all()
+
+class UpdateUserView(LoginRequiredMixin,UpdateView):
+    """Update profile view"""
+    template_name='users/update.html'
+    model=User
+    fields=['first_name','last_name','email','username','phone','country','city','state','company']
+
+    def get_success_url(self):
+        """Return to users detail"""
+        pk=self.object.pk
+        return reverse('users:detail',kwargs={'pk':pk})
+
+class DeleteUserView(DeleteView,LoginRequiredMixin):
+    """Delete Post"""
+    model=User
+    success_url= reverse_lazy('users:list')

@@ -8,13 +8,32 @@ from django.urls import path
 from companies.views import (CreateCompanyView, 
                             CreateAccesPointView, 
                             CreateScheduleView,
-                            ManageCompaniesView)
+                            ManageCompaniesView,
+                            DetailCompanyView,
+                            UpdateCompanyView,
+                            DeleteCompanyView,
+                            ListCompaniesView)
 
 app_name = 'companies'
 urlpatterns = [
     path('create',
     CreateCompanyView.as_view(),
     name = 'create'),
+    path('<int:pk>/detail/',
+    DetailCompanyView.as_view(),
+    name = 'detail'),
+
+    path('<int:pk>/update/',
+    UpdateCompanyView.as_view(),
+    name = 'update'),
+
+    path('<int:pk>/delete/',
+    DeleteCompanyView.as_view(),
+    name = 'delete'),
+
+    path('listcomapanies/',
+    ListCompaniesView.as_view(),
+        name='list'),
 
     path('accespoint/create',
     CreateAccesPointView.as_view(),

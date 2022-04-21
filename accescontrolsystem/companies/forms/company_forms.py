@@ -19,7 +19,8 @@ class CreateCompanyForm(forms.ModelForm):
     def save(self):
         """Create Company."""
         data = self.cleaned_data
-        user = User.objects.get(pk = data['administrator'].pk)
-        user.role = 'administrator'
-        user.save()
+        if data['administrator']:
+            user = User.objects.get(pk = data['administrator'].pk)
+            user.role = 'administrator'
+            user.save()
         Company.objects.create(**data)

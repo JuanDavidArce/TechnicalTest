@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +9,12 @@
 </head>
 <body>
 
-    {% if request.user.role == 'root' %}
-        <a href="{% url 'users:create' %}">Create an User</a> <br>
-        <a href="{% url 'users:list' %}">List of users</a> <br>
-    {% else %}
-        <p>
-            Acces denied
-        </p>
-    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button  type="submit" value="save">Actualizar</button>
+
+    </form>
     
 </body>
 </html>

@@ -20,17 +20,13 @@ class CreateCompanyView(LoginRequiredMixin,FormView):
     """Company register view"""
     template_name='companies/create.html'
     form_class=CreateCompanyForm
-    success_url=reverse_lazy('companies:create')
+    success_url=reverse_lazy('companies:list')
 
     def form_valid(self, form):
         """Save form data"""
         form.save()
         return super().form_valid(form)
     
-    def get_form(self):
-        form = super().get_form(self.form_class)
-        form.fields['administrator'].queryset = User.objects.filter(role = 'user' )
-        return form
 
 
 
@@ -57,8 +53,44 @@ class CreateScheduleView(LoginRequiredMixin,FormView):
         form.save()
         return super().form_valid(form)
 
-class ManageCompaniesView(TemplateView):
+class ManageCompaniesView(LoginRequiredMixin,TemplateView):
     """Manage companies view"""
     template_name='companies/manage.html'
+
+
+class DetailCompanyView(LoginRequiredMixin,DetailView):
+    """Detail company view"""
+    model = Company
+    template_name='companies/detail.html'
+
+
+class ListCompaniesView(LoginRequiredMixin,ListView):
+    """List of Companies"""
+    template_name= 'companies/list.html'
+    Model= Company
+    context_object_name='companies'
+
+    def get_queryset(self):
+        return Company.objects.all()
+    
+
+class UpdateCompanyView(LoginRequiredMixin,UpdateView):
+    """Update Company"""
+    template_name='companies/update.html'
+    model = Company
+    fields='__all__'
+
+    def get_success_url(self):
+        """Return to users detail"""
+        pk=self.object.pk
+        return reverse('companies:detail',kwargs={'pk':pk})
+
+    def dispatch(self, request, *args, **kwargs) :
+        return super().dispatch(request, *args, **kwargs)
+
+class DeleteCompanyView(DeleteView,LoginRequiredMixin):
+    """Delete Company"""
+    model=Company
+    success_url= reverse_lazy('companies:list')
 
 
