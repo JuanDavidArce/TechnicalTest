@@ -1,15 +1,13 @@
 """Companies views"""
 
 # Forms
-import pdb
-from companies.forms import  CreateCompanyForm,CreateAccesPointForm, CreateScheduleForm,UpdateCompanyForm
+from companies.forms import  CreateCompanyForm,UpdateCompanyForm
 
 
 # Django
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from companies.models.accespoint import AccesPoint
 
 
 # Models
@@ -32,54 +30,6 @@ class CreateCompanyView(LoginRequiredMixin,FormView):
         form.fields['administrator'].queryset = User.objects.filter(role = 'user' )
         return form
     
-
-class CreateAccesPointView(LoginRequiredMixin,FormView):
-    """Company register view"""
-    template_name='acces_points/create.html'
-    form_class=CreateAccesPointForm
-    success_url=reverse_lazy('companies:create_acces_point')
-
-    def form_valid(self, form):
-        """Save form data"""
-        form.save(company=Company.objects.get(administrator = self.request.user))
-        return super().form_valid(form)
-
-class DetailAccesPointView(LoginRequiredMixin,DetailView):
-    """Detail acces point"""
-    model = AccesPoint
-    template_name='acces_points/detail.html'
-
-
-class UpdateAccesPointView(LoginRequiredMixin,UpdateView):
-    """Update acces point"""
-    template_name='acces_points/update.html'
-    model = AccesPoint
-    fields = ['name', 'address','email', 'geolocation', 'is_active']
-    
-    def get_success_url(self):
-        """Return to users detail"""
-        pk=self.get_object().pk
-        return reverse('companies:detailaccespoint',kwargs={'pk':pk})
-    
-class DeleteAccesPointView(DeleteView,LoginRequiredMixin):
-    """Delete Company"""
-    model= AccesPoint
-    success_url= reverse_lazy('users:indexadministrator')
-   
-
-
-
-
-class CreateScheduleView(LoginRequiredMixin,FormView):
-    """Schedule register view"""
-    template_name='schedule/create.html'
-    form_class=CreateScheduleForm
-    success_url=reverse_lazy('companies:create_schedule')
-
-    def form_valid(self, form):
-        """Save form data"""
-        form.save()
-        return super().form_valid(form)
 
 class ManageCompaniesView(LoginRequiredMixin,TemplateView):
     """Manage companies view"""

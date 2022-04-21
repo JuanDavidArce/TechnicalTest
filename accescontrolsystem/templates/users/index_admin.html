@@ -16,7 +16,6 @@
             {{ accespoint.name }} <a href="{% url 'companies:detailaccespoint' accespoint.pk %}">Details</a> 
             <a href="{% url 'companies:updateaccespoint' accespoint.pk %}">Update</a>
             <a href="{% url 'companies:deleteaccespoint' accespoint.pk %}">Delete</a> 
-            <a href="">{{ accespoint.schedules_acces_point }}</a> 
             
     {% endfor %}
 

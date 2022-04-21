@@ -16,14 +16,5 @@
 
     </form>
 
-    {% for schedule in schedules %}
-
-            {{ schedule.user }} {{ schedule.start_time }} {{ schedule.ending_time }} <a href="{% url 'companies:detailschedule' schedule.pk %}">Details</a> 
-            <a href="{% url 'companies:updateschedule' schedule.pk %}">Update</a>
-            <a href="{% url 'companies:deleteschedule' schedule.pk %}">Delete</a> <br>
-     
-
-    {% endfor %}
-    
 </body>
 </html>
