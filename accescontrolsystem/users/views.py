@@ -8,13 +8,15 @@ from users.forms import  CreateForm
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView,TemplateView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 
 
 
 # Create your views here.
-class CreateView(FormView):
+class CreateView(LoginRequiredMixin,FormView):
     """Users register view"""
     template_name='users/create.html'
     form_class=CreateForm
@@ -25,11 +27,13 @@ class CreateView(FormView):
         form.save()
         return super().form_valid(form)
 
+
 class LoginView(auth_views.LoginView):
     """Login view"""
     template_name='users/login.html'
     success_url=reverse_lazy('users:create')
 
     
-    
+class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
+    """Logout View"""
 

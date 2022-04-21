@@ -12,10 +12,11 @@ class CreateAccesPointForm(forms.ModelForm):
 
     class Meta:
         model = AccesPoint
-        fields = '__all__'
+        exclude = ['company']
 
     
     def save(self):
+        # CHECK TO ASSING COMPANY
         """Create Acces point."""
         data = self.cleaned_data
         AccesPoint.objects.create(**data)

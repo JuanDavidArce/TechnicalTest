@@ -7,13 +7,14 @@ from companies.forms import  CreateCompanyForm,CreateAccesPointForm, CreateSched
 # Django
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView,ListView,TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Models
 from users.models import User
 
 
-class CreateCompanyView(FormView):
+class CreateCompanyView(LoginRequiredMixin,FormView):
     """Company register view"""
     template_name='companies/create.html'
     form_class=CreateCompanyForm
@@ -31,7 +32,7 @@ class CreateCompanyView(FormView):
 
 
 
-class CreateAccesPointView(FormView):
+class CreateAccesPointView(LoginRequiredMixin,FormView):
     """Company register view"""
     template_name='acces_points/create.html'
     form_class=CreateAccesPointForm
@@ -43,7 +44,7 @@ class CreateAccesPointView(FormView):
         return super().form_valid(form)
 
 
-class CreateScheduleView(FormView):
+class CreateScheduleView(LoginRequiredMixin,FormView):
     """Schedule register view"""
     template_name='schedule/create.html'
     form_class=CreateScheduleForm
