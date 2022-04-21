@@ -84,7 +84,7 @@ class UpdateUserView(LoginRequiredMixin,UpdateView):
     """Update profile view"""
     template_name='users/update.html'
     model=User
-    fields=['first_name','last_name','email','username','phone','country','city','state','company']
+    fields=['first_name','last_name','email','username','phone','country','city','state','company','address']
 
     def get_success_url(self):
         """Return to users detail"""
