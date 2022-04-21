@@ -36,7 +36,7 @@ class LoginView(auth_views.LoginView):
         if self.request.user.role == 'root':
             return reverse('users:indexroot')
         elif self.request.user.role == 'administrator':
-            return reverse('companies:create_acces_point')
+            return reverse('users:indexadministrator')
         
 
     
@@ -47,6 +47,10 @@ class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
 class IndexUserRootView(LoginRequiredMixin,TemplateView):
     """Index root"""
     template_name='users/index_root.html'
+
+class IndexAdministratorView(LoginRequiredMixin,TemplateView):
+    """Index administrator"""
+    template_name='users/index_admin.html'
 
 
 class ManageUsersView(LoginRequiredMixin,TemplateView):

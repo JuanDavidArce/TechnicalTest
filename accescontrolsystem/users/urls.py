@@ -12,7 +12,8 @@ from users.views import (CreateView, DeleteUserView,
                         ManageUsersView,
                         DetailUserView,
                         ListUsersView,
-                        UpdateUserView)
+                        UpdateUserView,
+                        IndexAdministratorView)
 
 app_name = 'users'
 urlpatterns = [
@@ -51,6 +52,10 @@ urlpatterns = [
     path('listusers/',
     ListUsersView.as_view(),
         name='list'),
+
+    path('indexadministrator/',
+    IndexAdministratorView.as_view(),
+        name='indexadministrator'),
 
     
 ]
