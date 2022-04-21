@@ -42,8 +42,12 @@ DJANGO_APPS = [
 THIRD_PART_APPS = [
 
 ]
+LOCAL_APPS = [
+    'users.apps.UsersConfig',
+    'companies.apps.CompaniesConfig'
+]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PART_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PART_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
@@ -132,3 +136,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
