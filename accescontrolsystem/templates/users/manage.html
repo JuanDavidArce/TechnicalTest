@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
+{% extends 'base.html' %}
+{% block content %}
     {% if request.user.role == 'root' %}
-        <a href="{% url 'users:create' %}">Create an User</a> <br>
-        <a href="{% url 'users:list' %}">List of users</a> <br>
+        <div class="row justify-content-center">
+            <h1>Manage Users</h1>
+        </div>
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-light"><a href="{% url 'users:create' %}">Create an User</a></button>
+            <button type="button" class="btn btn-light"><a href="{% url 'users:list' %}">List of users</a> </button>
+        </div>
+
     {% else %}
         <p>
             Acces denied
         </p>
     {% endif %}
+{% endblock %}
+
     
-</body>
-</html>

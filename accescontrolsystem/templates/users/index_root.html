@@ -2,12 +2,18 @@
     
 {% block content %}
     {% if request.user.role == 'root' %}
-    <a href="{% url 'users:manage' %}">Manage users</a> <br>
-    <a href="{% url 'companies:manage' %}">Manage companies</a>
+        <div class="row justify-content-center">
+            <h1>Root menu</h1>
+        </div>
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-light"><a href="{% url 'companies:manage' %}">Manage companies</a></button>
+            <button type="button" class="btn btn-light"><a href="{% url 'users:manage' %}">Manage Users</a> </button>
+        </div>
+
     {% else %}
-    <p>
-        Acces denied
-    </p>
+        <p>
+            Acces denied
+        </p>
     {% endif %}
 {% endblock %}
 

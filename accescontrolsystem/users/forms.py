@@ -10,10 +10,17 @@ from users.models import User
 class CreateForm(forms.ModelForm):
     """Create form"""
 
-    password_confirmation = forms.CharField(max_length=50)
+    password_confirmation = forms.CharField(max_length=50,widget=forms.PasswordInput(attrs={'placeholder':'********','autocomplete': 'off','data-toggle': 'password'}))
     class Meta:
         model = User
         fields = ['first_name','last_name','username','phone','country','state','city','email','password']
+        help_texts = {
+            'username': None,
+        }
+        widgets = {
+            "password": forms.PasswordInput(attrs={'placeholder':'********','autocomplete': 'off','data-toggle': 'password'}),
+
+        }
 
     def clean_username(self):
         """Username must be unique."""
