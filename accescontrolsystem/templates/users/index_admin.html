@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="{% url 'companies:create_acces_point' %}">Create acces Point</a><br>
-    <a href="{% url 'companies:create_schedule' %}">Create Schedule for acces Point</a><br>
-    <a href=""></a> <br>
+{% extends 'base.html' %}
 
-    {% for accespoint in accespoints %}
+{% block content %}
+    
+    <div class="row justify-content-center">
+        <h1>Administrator menu</h1>
+    </div>
 
-            {{ accespoint.name }} <a href="{% url 'companies:detailaccespoint' accespoint.pk %}">Details</a> 
-            <a href="{% url 'companies:updateaccespoint' accespoint.pk %}">Update</a>
-            <a href="{% url 'companies:deleteaccespoint' accespoint.pk %}">Delete</a> 
-            
-    {% endfor %}
+    <div class="row justify-content-center">
+        <button type="button" class="btn btn-light"><a href="{% url 'companies:create_acces_point' %}">Create acces Point</a><br></button>
+        <button type="button" class="btn btn-light"><a href="{% url 'companies:create_schedule' %}">Create Schedule for acces Point</a><br></button>
+    </div>
+    
+    <br>
 
-    <div>
+    <div class="row justify-content-center">
+        {% for accespoint in accespoints %}
+
+            <div class="col-sm-4 ">
+                <div class="row justify-content-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ accespoint.name }}</h5>
+                            <a href="{% url 'companies:detailaccespoint' accespoint.pk %}" class="btn btn-primary">Details</a><br><br>
+                            <a href="{% url 'companies:updateaccespoint' accespoint.pk %}" class="btn btn-primary">Update</a><br><br>
+                            <a href="{% url 'companies:deleteaccespoint' accespoint.pk %}" class="btn btn-primary">Delete</a>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+    
+    <br>
+    <div class="row justify-content-center">
         <span class="step-links">
             {% if page_obj.has_previous %}
                 <a href="?page=1">&laquo; first</a>
@@ -37,5 +52,4 @@
         </span>
     </div>
 
-</body>
-</html>
+{% endblock %}

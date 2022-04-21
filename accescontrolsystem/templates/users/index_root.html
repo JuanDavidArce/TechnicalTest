@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
     
+{% block content %}
     {% if request.user.role == 'root' %}
-        <a href="{% url 'users:manage' %}">Manage users</a> <br>
-        <a href="{% url 'companies:manage' %}">Manage companies</a>
+    <a href="{% url 'users:manage' %}">Manage users</a> <br>
+    <a href="{% url 'companies:manage' %}">Manage companies</a>
     {% else %}
-        <p>
-            Acces denied
-        </p>
+    <p>
+        Acces denied
+    </p>
     {% endif %}
+{% endblock %}
 
-</body>
-</html>
+
