@@ -1,0 +1,12 @@
+<ul class="nav justify-content-end">
+    <li class="nav-item active">
+    {% if request.user.role == 'root' %}
+        <a class="nav-link active" href= {% url 'users:indexroot' %}>Index</a>
+    {% else %}
+        <a class="nav-link active" href= {% url 'users:indexadministrator' %}>Index</a>
+    {% endif %}
+    </li>
+    <li class="nav-link active">
+      <a class="" href="{% url 'users:logout' %}">Logout</a>
+    </li>
+</ul>
