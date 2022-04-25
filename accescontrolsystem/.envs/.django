@@ -1,1 +1,4 @@
 SECRET_KEY=django-insecure-f&^msb@qye!zg!s@z736_tucg8)s2+dwx*l++_p^fa%f=7+ug=
+EMAIL_HOST_USER=informationaccesscontrol@gmail.com
+EMAIL_HOST_PASSWORD=AccessControl321
+EMAIL_PORT=587

@@ -7,6 +7,14 @@ import django.forms as forms
 from users.models import User
 
 
+# Utils
+from utils.email import *
+
+
+# Python
+import threading
+
+
 class CreateForm(forms.ModelForm):
     """Create form"""
 
@@ -46,4 +54,7 @@ class CreateForm(forms.ModelForm):
         """Create user"""
         data = self.cleaned_data
         data.pop('password_confirmation')
-        User.objects.create_user(**data)
+        user = User.objects.create_user(**data)
+        thread = threading.Thread(target=send_user_mail, 
+                                    args= (user,'Registration in access control platform','emails/email_notification_register.html', {'password':data['password']}, ))
+        thread.start()

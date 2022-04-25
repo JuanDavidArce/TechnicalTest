@@ -144,3 +144,17 @@ LOGIN_REDIRECT_URL = '/users/create'
 LOGOUT_REDIRECT_URL = '/users/login'
 
 LOGIN_URL = '/users/login'
+
+# Email
+EMAIL_USE_TLS = True
+
+
+EMAIL_USE_SSL = False
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+EMAIL_PORT = os.environ['EMAIL_PORT']
