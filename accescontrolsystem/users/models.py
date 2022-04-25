@@ -22,7 +22,7 @@ class User(AbstractUser):
                                 blank = True,null = True,
                                 related_name='users_company')
     
-    address = models.EmailField()
+    address = models.CharField(max_length=250)
     phone = models.CharField(max_length = 15)
     country = models.CharField(max_length = 50)
     state = models.CharField(max_length = 50)

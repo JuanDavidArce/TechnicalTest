@@ -1,6 +1,7 @@
 """Companies views"""
 
 # Forms
+import pdb
 from companies.forms import   CreateScheduleForm
 
 
@@ -8,7 +9,9 @@ from companies.forms import   CreateScheduleForm
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from companies.models.schedule import Schedule
+from companies.models import Schedule
+from companies.models import AccesPoint
+from users.models import User
 
 
 
@@ -45,5 +48,12 @@ class CreateScheduleView(LoginRequiredMixin,FormView):
         """Save form data"""
         form.save()
         return super().form_valid(form)
+    
+    def get_form(self):
+        acces_point =  AccesPoint.objects.filter (pk=self.kwargs['pk']) # Pk acces point
+        form = super().get_form(self.form_class)
+        form.fields['user'].queryset = User.objects.filter(company = acces_point[0].company ).exclude(role ='administrator')
+        form.fields['acces_point'].queryset = acces_point
+        return form
  
     

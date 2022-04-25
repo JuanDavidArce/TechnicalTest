@@ -10,8 +10,8 @@
             <form  method = "POST" action="{% url 'users:login' %}">
                 
                 {% csrf_token %}
-                <input placeholder="Nombre de usuario" name="username"><br>
-                <input  placeholder="Contraseña" name="password"><br>
+                <input placeholder="Username" name="username"><br>
+                <input  placeholder="Password" name="password" type="password"><br>
                 <button type="submit" class="btn-primary">Login</button>
                 
             </form>

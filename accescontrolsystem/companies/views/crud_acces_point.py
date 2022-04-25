@@ -19,7 +19,7 @@ from companies.models import Company
 
 
 class CreateAccesPointView(LoginRequiredMixin,FormView):
-    """Company register view"""
+    """Acces Point register view"""
     template_name='acces_points/create.html'
     form_class=CreateAccesPointForm
     success_url=reverse_lazy('users:indexadministrator')
@@ -52,7 +52,7 @@ class UpdateAccesPointView(LoginRequiredMixin,UpdateView):
         return context
     
 class DeleteAccesPointView(DeleteView,LoginRequiredMixin):
-    """Delete Company"""
+    """Delete Acces point"""
     model= AccesPoint
     success_url= reverse_lazy('users:indexadministrator')
    

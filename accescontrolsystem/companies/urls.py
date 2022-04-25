@@ -67,7 +67,7 @@ urlpatterns = [
 
 
     # Schedule
-    path('accespoint/schedule/create',
+    path('accespoint/<int:pk>/schedule/create',
     CreateScheduleView.as_view(),
     name = 'create_schedule'),
 

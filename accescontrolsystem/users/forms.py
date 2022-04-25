@@ -13,7 +13,7 @@ class CreateForm(forms.ModelForm):
     password_confirmation = forms.CharField(max_length=50,widget=forms.PasswordInput(attrs={'placeholder':'********','autocomplete': 'off','data-toggle': 'password'}))
     class Meta:
         model = User
-        fields = ['first_name','last_name','username','phone','country','state','city','email','password']
+        fields = ['first_name','last_name','username','address','phone','country','state','city','email','password']
         help_texts = {
             'username': None,
         }
@@ -43,7 +43,7 @@ class CreateForm(forms.ModelForm):
         return data
 
     def save(self):
-        """Create user and profile."""
+        """Create user"""
         data = self.cleaned_data
         data.pop('password_confirmation')
         User.objects.create_user(**data)

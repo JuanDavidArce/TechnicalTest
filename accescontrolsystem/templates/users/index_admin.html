@@ -8,7 +8,6 @@
 
     <div class="row justify-content-center">
         <button type="button" class="btn btn-light"><a href="{% url 'companies:create_acces_point' %}">Create acces Point</a><br></button>
-        <button type="button" class="btn btn-light"><a href="{% url 'companies:create_schedule' %}">Create Schedule for acces Point</a><br></button>
     </div>
     
     <br>
@@ -17,15 +16,29 @@
         {% for accespoint in accespoints %}
 
             <div class="col-sm-4 ">
-                <div class="row justify-content-center">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ accespoint.name }}</h5>
-                            <a href="{% url 'companies:detailaccespoint' accespoint.pk %}" class="btn btn-primary">Details</a><br><br>
-                            <a href="{% url 'companies:updateaccespoint' accespoint.pk %}" class="btn btn-primary">Update</a><br><br>
-                            <a href="{% url 'companies:deleteaccespoint' accespoint.pk %}" class="btn btn-primary">Delete</a>
+                <div class="container justify-content-center">
+                    <div class="card row justify-content-center">
+                        <div class="card-body col justify-content-center">
+
+                            <h5 class="card-title row justify-content-center">{{ accespoint.name }}</h5>
+                            <div class="row justify-content-center">
+                                <a href="{% url 'companies:detailaccespoint' accespoint.pk %}" class="btn btn-primary ">Details</a>
+                            </div>
+                            <br>
+                            <div class="row justify-content-center">
+                                <a href="{% url 'companies:updateaccespoint' accespoint.pk %}" class="btn btn-primary">Update</a><br><br>
+                            </div>
+                            <br>
+                            <div class="row justify-content-center">
+                                <a href="{% url 'companies:deleteaccespoint' accespoint.pk %}" class="btn btn-primary">Delete</a><br><br>
+                            </div>
+                            <br>
+                            <div class="row justify-content-center">
+                                <a href="{% url 'companies:create_schedule' accespoint.pk %}" class="btn btn-primary">Create Schedule</a>
+                            </div>
                         
                         </div>
+
                     </div>
                 </div>
             </div>

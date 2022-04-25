@@ -21,7 +21,7 @@ class CreateView(LoginRequiredMixin,FormView):
     """Users register view"""
     template_name='users/create.html'
     form_class=CreateForm
-    success_url=reverse_lazy('users:create')
+    success_url=reverse_lazy('users:manage')
 
     def form_valid(self, form):
         """Save form data"""
