@@ -38,7 +38,11 @@ class CreateCompanyForm(forms.ModelForm):
                                     {'company':data['name'],'operation':'assignment to company'}, ))
             thread.start()
 
-        Company.objects.create(**data)
+        company = Company.objects.create(**data)
+
+        if data['administrator']:
+            user.company = company
+            user.save()
 
         
 class UpdateCompanyForm(forms.ModelForm):
@@ -67,6 +71,7 @@ class UpdateCompanyForm(forms.ModelForm):
                         thread.start()
             
                     user.role = 'administrator'
+                    user.company = company
                     user.save()
                     thread = threading.Thread(target=send_user_mail, 
                                     args= (user,'Assignment to company',
@@ -83,6 +88,7 @@ class UpdateCompanyForm(forms.ModelForm):
                                     'emails/admin_removal.html', {'operation':'admin removal'},))
                 thread.start()
                 administrator.save()
+
         if kwargs.get('pk',False):
             company = Company.objects.filter(pk = kwargs['pk'])
             company.update(**data)
