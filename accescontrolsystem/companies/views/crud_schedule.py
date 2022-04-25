@@ -1,7 +1,6 @@
-"""Companies views"""
+"""Schedule views"""
 
 # Forms
-import pdb
 from companies.forms import   CreateScheduleForm
 
 
@@ -9,6 +8,9 @@ from companies.forms import   CreateScheduleForm
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+# Models
 from companies.models import Schedule
 from companies.models import AccesPoint
 from users.models import User

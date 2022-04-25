@@ -12,4 +12,5 @@ class Invitation(models.Model):
                                     related_name = 'invitations_company',
                                     on_delete = models.CASCADE)
     email = models.EmailField(unique=True,
-                            error_messages="There is already an invitation with this email")
+                            error_messages={
+                            'unique':'A user with that email already exists'})

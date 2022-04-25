@@ -18,7 +18,10 @@ from companies.views import (CreateCompanyView,
                             UpdateAccesPointView,
                             UpdateScheduleView,
                             DetailScheduleView,
-                            DeleteScheduleView)
+                            DeleteScheduleView,
+                            CreateInvitationView,
+                            ListInvitationsView,
+                            DeleteInvitationView)
 
 app_name = 'companies'
 urlpatterns = [
@@ -83,4 +86,18 @@ urlpatterns = [
     path('accespoint/schedule/<int:pk>/delete/',
     DeleteScheduleView.as_view(),
     name = 'deleteschedule'),
+
+    # Invitation
+
+    path('<int:pk>/invitation/create',
+    CreateInvitationView.as_view(),
+    name = 'create_invitation'),
+
+    path('<int:pk>/invitation/delete/',
+    DeleteInvitationView.as_view(),
+    name = 'delete_invitation'),
+
+    path('<int:pk>/listinvitations/',
+    ListInvitationsView.as_view(),
+        name='invitations_list'),
 ]
