@@ -16,6 +16,9 @@ def send_user_mail(user_to_send,subject,template,kwargs):
 
     if kwargs['operation'] == 'assignment to company' or kwargs['operation'] == 'invitation':
         data['company'] = kwargs['company']
+    
+    if kwargs['operation'] == 'invitation':
+        data['pin'] = kwargs['pin']
 
     content = template.render(data)
 

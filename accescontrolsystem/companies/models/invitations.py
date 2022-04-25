@@ -14,3 +14,5 @@ class Invitation(models.Model):
     email = models.EmailField(unique=True,
                             error_messages={
                             'unique':'A user with that email already exists'})
+    
+    pin = models.CharField(max_length = 32,unique=True,null=False,default='None')
