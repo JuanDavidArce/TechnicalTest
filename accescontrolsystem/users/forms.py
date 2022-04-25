@@ -56,5 +56,7 @@ class CreateForm(forms.ModelForm):
         data.pop('password_confirmation')
         user = User.objects.create_user(**data)
         thread = threading.Thread(target=send_user_mail, 
-                                    args= (user,'Registration in access control platform','emails/email_notification_register.html', {'password':data['password']}, ))
+                                    args= (user,'Registration in access control platform',
+                                    'emails/email_notification_register.html', 
+                                    {'password':data['password'],'operation':'notification registration'}, ))
         thread.start()
