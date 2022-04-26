@@ -1,13 +1,14 @@
 """Schedule views"""
 
 # Forms
-from companies.forms import   CreateScheduleForm
+from companies.forms import   CreateScheduleForm,UpdateScheduleForm
 
 
 # Django
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+import django.forms as forms
 
 
 # Models
@@ -28,16 +29,29 @@ class DeleteScheduleView(DeleteView,LoginRequiredMixin):
     success_url= reverse_lazy('users:indexadministrator')
 
 
+
 class UpdateScheduleView(LoginRequiredMixin,UpdateView):
     """Update schedule"""
     template_name='schedules/update.html'
+    form_class = UpdateScheduleForm
     model = Schedule
-    fields = ['start_time', 'ending_time','user']
-    
+
     def get_success_url(self):
         """Return to users detail"""
         pk=self.get_object().pk
-        return reverse('companies:detailschedule',kwargs={'pk':pk})
+        return reverse('users:indexadministrator')
+    
+    def form_valid(self, form):
+        """Save form data"""
+        form.save(pk=self.get_object().pk)
+        return super().form_valid(form)
+    
+    def get_form(self):
+        acces_point =  self.get_object().acces_point
+        form = super().get_form(self.form_class)
+        form.fields['user'].queryset = User.objects.filter(company = acces_point.company ).exclude(role ='administrator')
+        return form
+    
 
 
 class CreateScheduleView(LoginRequiredMixin,FormView):
@@ -46,13 +60,14 @@ class CreateScheduleView(LoginRequiredMixin,FormView):
     form_class=CreateScheduleForm
     success_url=reverse_lazy('users:indexadministrator')
 
+
     def form_valid(self, form):
         """Save form data"""
         form.save()
         return super().form_valid(form)
     
     def get_form(self):
-        acces_point =  AccesPoint.objects.filter (pk=self.kwargs['pk']) # Pk acces point
+        acces_point =  AccesPoint.objects.filter (pk=self.kwargs['pk']) 
         form = super().get_form(self.form_class)
         form.fields['user'].queryset = User.objects.filter(company = acces_point[0].company ).exclude(role ='administrator')
         form.fields['acces_point'].queryset = acces_point
