@@ -8,7 +8,6 @@ from companies.forms import   CreateScheduleForm,UpdateScheduleForm
 from django.urls.base import reverse_lazy,reverse
 from django.views.generic import DetailView,FormView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-import django.forms as forms
 
 
 # Models
@@ -38,7 +37,6 @@ class UpdateScheduleView(LoginRequiredMixin,UpdateView):
 
     def get_success_url(self):
         """Return to users detail"""
-        pk=self.get_object().pk
         return reverse('users:indexadministrator')
     
     def form_valid(self, form):
