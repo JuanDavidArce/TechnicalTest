@@ -1,8 +1,8 @@
 """Users views"""
 
 # Forms
-from pyexpat import model
-from users.forms import  CreateForm
+import pdb
+from users.forms import  CreateUserByInvitationForm,CreateForm
 
 
 # Django
@@ -28,6 +28,7 @@ class CreateView(LoginRequiredMixin,FormView):
         form.save()
         return super().form_valid(form)
 
+        
 
 class LoginView(auth_views.LoginView):
     """Login view"""
@@ -42,7 +43,6 @@ class LoginView(auth_views.LoginView):
             return reverse('users:login')
 
         
-
     
 class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
     """Logout View"""
@@ -64,8 +64,6 @@ class IndexAdministratorView(LoginRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         context['company' ]= Company.objects.get(administrator = self.request.user)
         return context
-
-
 
 
 class ManageUsersView(LoginRequiredMixin,TemplateView):
@@ -102,3 +100,22 @@ class DeleteUserView(DeleteView,LoginRequiredMixin):
     """Delete Post"""
     model=User
     success_url= reverse_lazy('users:list')
+
+class CreateUserInvitationView(FormView):
+    """Users register by invitation view"""
+    template_name='users/create_by_invitation.html'
+    form_class=CreateUserByInvitationForm
+    success_url=reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        """Save form data"""
+        form.save()
+        return super().form_valid(form)
+    
+    def get_form(self):
+        form = super().get_form(self.form_class)
+        form.fields['company'].queryset = Company.objects.filter(pk = self.kwargs['pk']) 
+        return form
+    
+
+

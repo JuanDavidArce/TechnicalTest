@@ -11,7 +11,6 @@ from users.models import User
 
 # Utils
 from utils.email import *
-from utils.pin_generator import *
 
 
 # Python
@@ -29,7 +28,6 @@ class CreateInvitationForm(forms.ModelForm):
     def save(self):
         """Create Invitation."""
         data = self.cleaned_data
-        data['pin'] = generate_pin()
         Invitation.objects.create(**data)
         thread = threading.Thread(target=send_user_mail, 
                                     args= (User(email=data['email'],
@@ -38,6 +36,6 @@ class CreateInvitationForm(forms.ModelForm):
                                     'Invitation',
                                     'emails/invitation.html', 
                                     {'operation':'invitation',
-                                    'company':data['company'],
-                                    'pin':data['pin']},))
+                                    'company':data['company']}))
         thread.start()
+

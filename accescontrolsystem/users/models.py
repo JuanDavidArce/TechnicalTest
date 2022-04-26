@@ -20,7 +20,7 @@ class User(AbstractUser):
     company = models.ForeignKey('companies.Company',
                                 on_delete=models.SET_NULL,
                                 blank = True,null = True,
-                                related_name='users_company')
+                                related_name='users_company',)
     
     address = models.CharField(max_length=250)
     phone = models.CharField(max_length = 15)

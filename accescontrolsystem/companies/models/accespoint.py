@@ -12,7 +12,7 @@ class AccesPoint(models.Model):
     email = models.EmailField()
     company = models.ForeignKey('companies.Company',
                                 related_name = 'accespoints_company',
-                                on_delete = models.CASCADE)
+                                on_delete = models.CASCADE ,null=True)
 
     geolocation = models.CharField(max_length = 250)
     is_active = models.BooleanField(default = True)

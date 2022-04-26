@@ -13,13 +13,18 @@ from users.views import (CreateView, DeleteUserView,
                         DetailUserView,
                         ListUsersView,
                         UpdateUserView,
-                        IndexAdministratorView)
+                        IndexAdministratorView,
+                        CreateUserInvitationView)
 
 app_name = 'users'
 urlpatterns = [
     path('create/',
     CreateView.as_view(),
     name = 'create'),
+
+    path('create_by_invitation/<int:pk>',
+    CreateUserInvitationView.as_view(),
+    name = 'create_by_invitation'),
 
     path('<int:pk>/detail/',
     DetailUserView.as_view(),

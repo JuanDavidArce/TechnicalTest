@@ -43,7 +43,6 @@ class UpdateAccesPointView(LoginRequiredMixin,UpdateView):
     
     def get_success_url(self):
         """Return to users detail"""
-        pdb.set_trace()
         pk=self.get_object().pk
         return reverse('companies:detailaccespoint',kwargs={'pk':pk})
     def get_context_data(self, **kwargs):

@@ -17,4 +17,5 @@ class Schedule(models.Model):
     ending_time = models.TimeField()
     user = models.ForeignKey('users.User',
                             related_name = 'schedules_user',
-                            on_delete = models.CASCADE)
+                            on_delete = models.CASCADE,
+                            null=True)

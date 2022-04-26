@@ -9,14 +9,13 @@
 </head>
 
 <body>
-    <p>
-        Hello.
-    </p>
-    <p>
-        The company {{ company }} wants you to be part of it, go and register here 
-        localhost:8000{% url 'users:create_by_invitation' company.pk %}
-    </p>
-
+    <div>
+        <p>
+            Welcome {{ full_name }}, you have been registered in the access control platform, as a member of 
+            {{ company }} 
+        </p>
+        
+    </div>
 </body>
 
 </html>
