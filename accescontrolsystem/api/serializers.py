@@ -1,6 +1,7 @@
 """Api Serializers"""
 # Python
 from datetime import datetime
+import threading
 
 
 # Django REST Framework
@@ -10,6 +11,10 @@ from rest_framework.authtoken.models import Token
 
 # Models
 from companies.models import AccesPoint, Schedule
+
+
+# Utils
+from utils.email import *
 
 
 class ValidateAccessSerializer(serializers.Serializer):
@@ -31,6 +36,11 @@ class ValidateAccessSerializer(serializers.Serializer):
                                             user = user).filter(start_time__gte = data['time'],
                                                                 ending_time__lte = data['time'])
         if not schedules:
+            thread = threading.Thread(target=send_user_mail, 
+                                    args= (acces_point[0].company.administrator,'Unauthorized access attempt',
+                                    'emails/unauthorized.html', 
+                                    {'acces_point':acces_point,'operation':'unauthorized','user':user}, ))
+            thread.start()
             raise serializers.ValidationError({'error':'You are not allowed to enter, the administrator will be notified'})
         
         return data

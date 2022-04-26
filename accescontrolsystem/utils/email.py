@@ -15,6 +15,11 @@ def send_user_mail(user_to_send, subject, template, kwargs):
 
     if kwargs['operation'] == 'assignment to company' or kwargs['operation'] == 'invitation' or kwargs['operation'] == 'notification registration company':
         data['company'] = kwargs['company']
+    
+    if kwargs['operation'] == 'unauthorized':
+        data['acces_point'] = kwargs['acces_point']
+        data['email'] = user_to_send.email
+        data['user_not_allowed'] = kwargs['user']
 
     content = template.render(data)
 
