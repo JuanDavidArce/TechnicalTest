@@ -17,7 +17,7 @@ def send_user_mail(user_to_send, subject, template, kwargs):
         data['company'] = kwargs['company']
     
     if kwargs['operation'] == 'unauthorized':
-        data['acces_point'] = kwargs['acces_point']
+        data['acces_point'] = kwargs['acces_point'][0]
         data['email'] = user_to_send.email
         data['user_not_allowed'] = kwargs['user']
 
