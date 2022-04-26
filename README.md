@@ -49,6 +49,7 @@ Docker Compose:
 ```
 
 ### Instalación y ejecución del proyecto🔧
+***NOTA: SI NO DESEEAMOS INSTALAR LA APLICACION EN LOCAL, REVISAR PRIMERO LA SECCION DESPLIEGUE***
 IMPORTANTE: Debemos abrir la aplicacion de docker en Windows y Mac, una vez hecho esto podemos proseguir con el proceso.
 al abrir la aplicacion en windows se podria presentar el error "Hardware assisted virtualization and data execution protection must be enabled in the BIOS", para solucionarlo, basta con abrir una terminal como administrador y correr el comando "bcdedit /set hypervisorlaunchtype auto", reiniciar el pc abrir la aplicacion y continuar con el proceso.
 
@@ -103,6 +104,7 @@ _Con el paso anterior ya deberíamos tener nuestro entorno listo para hacer prue
 
 
 ## Ejecucion ⚙️
+***NOTA:SI NO DESEEAMOS CORRER LA APLICACION EN LOCAL, SALTAR A LA SECCION DESPLIEGUE***
 
 _Una vez hemos creado nuestro usuario root, ya podemos hacer login con el y crear tanto empresas como usuarios para que sean administradores de dichas empresas_
 
@@ -112,7 +114,7 @@ _Cuando ingresamos con nuestro usuario administrador vamos a tener la opcion de 
 
 _Ya que tenemos nuestro usuario invitado y registrado, con nuestro usuario administrador podemos crear un punto de acceso al cual le vamos a crear un horario para el usuario que acabamos de registrar_
 
-_Una vez hemos hecho esto ya podemos comenzar a probar nuestra api, lo primero que haremos sera hacer login para obtener el token de acceso y de actualizacion.Enviamos una peticion POST a la ruta ***localhost:8000/api/token/*** , con un body en formato JSON con los siguientes elementos:_
+_Una vez hemos hecho esto ya podemos comenzar a probar nuestra api,para el caso de local ***tenemos un archivo de postman (TechnicalTestLocal.postman\_collection.json)*** el cual podemos importar desde la aplicacion, lo primero que haremos sera hacer login para obtener el token de acceso y de actualizacion.Enviamos una peticion POST a la ruta ***localhost:8000/api/token/*** , con un body en formato JSON con los siguientes elementos:_
 
 ```
 {
@@ -142,7 +144,22 @@ _Es importante mencionar que en esta ultima peticion se requiere que en los head
 
 ## Despliegue 📦
 
-_Para hacer deploy es bastante fácil gracias a las facilidades de Docker, para ello solo necesitamos instalar Docker y Docker Compose en nuestro servidor, posterior a esto ejecutar los mismos comandos mencionados en instalación y ejecución, habilitar el puerto en el servidor para que sea accesible, y con esto ya tendríamos nuestra aplicación desplegada._
+_Para hacer deploy es bastante fácil gracias a las facilidades de Docker, para ello solo necesitamos instalar Docker y Docker Compose en nuestro servidor, posterior a esto ejecutar los mismos comandos mencionados en instalación y ejecución, habilitar el puerto en el servidor para que sea accesible, y con esto ya tendríamos nuestra aplicación desplegada.Para nuestro caso la tenemos desplegada en aws en la siguiente direccion:_
+
+```
+http://3.144.226.58:8000/users/login/
+
+```
+_La url anterior ya trae un usuario root con las siguientes credenciales:_
+
+
+```
+email : root@root.com
+password : root1234
+
+```
+
+_Con este usuario podemos realizar todos los pasos mencionados en el apartado de ***ejecucion***, tambien ***es importante mencionar que contamos con un archivo postman para consultar la api al servidor de aws (TechnicalTestRemote.postman\_collection.json)***_
 
 ## Notas
 

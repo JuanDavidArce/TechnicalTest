@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "7faf34d5-4b17-4dbd-bbc0-2c04ac2d65dd",
+		"name": "TechnicalTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\":\"test0204\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://3.144.226.58:8000/api/token/",
+					"protocol": "http",
+					"host": [
+						"3",
+						"144",
+						"226",
+						"58"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n    \"refresh\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY1MTAzNjU4OCwiaWF0IjoxNjUwOTUwMTg4LCJqdGkiOiJjOWNkOGVkNDc0MTQ0Y2U2YWRiNWIwM2M5ZTVjNmNjZCIsInVzZXJfaWQiOjN9.eKqoed0YYfCc49HXZrIappvvXWnTMf7lEEKGWE0VNmw\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/token/refresh/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Access",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwOTUwNTExLCJpYXQiOjE2NTA5NTAxODgsImp0aSI6Ijk2ZDc5MmZlYWZiYTRjYTliMjFlODdhYzFjNmI5NmNkIiwidXNlcl9pZCI6M30.ptncN0EDnz3oCZ9plNHYWl-HeDXjd5Tb2wuHxE76P4U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"acces_point_id\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/validate_access/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"validate_access",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
