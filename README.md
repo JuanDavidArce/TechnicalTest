@@ -88,23 +88,57 @@ _Una vez construido nuestro entorno vamos a proceder a ejecutarlo con el siguien
 	* sudo docker-compose up -d
 ```
 
-_Es importante mencionar que debemos crear nuestro usuario root, lo cual lo hacemos moviendonos hasta el sitio donde esta el archivo docker-compose.yml, en nuestra terminal.una vez hecho esto escribimos el siguinete comando(role = root):_
+_Es importante mencionar que debemos crear nuestro usuario root, lo cual lo hacemos moviendonos hasta el sitio donde esta el archivo docker-compose.yml, en nuestra terminal.una vez hecho esto escribimos el siguinete comando *** (role = root) ***:_
 
 ```
 -Windows y Mac:
 	* docker-compose run --rm django python3 manage.py createsuperuser
 
 -Ubuntu:
-	* docker-compose run --rm django python3 manage.py createsuperuser
+	* sudo docker-compose run --rm django python3 manage.py createsuperuser
 ```
 
-_Con el paso anterior ya deberíamos tener nuestro entorno listo para hacer pruebas y verificar el funcionamiento del proyecto lo cual podemos hacer en la direccion localhost:8000/users/login/_
+_Con el paso anterior ya deberíamos tener nuestro entorno listo para hacer pruebas y verificar el funcionamiento del proyecto lo cual podemos hacer en la direccion *** localhost:8000/users/login/ ***_
 
 
 
-## Ejecutando tests ⚙️
+## Ejecucion ⚙️
 
+_Una vez hemos creado nuestro usuario root, ya podemos hacer login con el y crear tanto empresas como usuarios para que sean administradores de dichas empresas_
 
+_Cuando hayamos creados usuarios adminstradores y tengamos alguno asignado a una empresa, al correo que se registro van a llegar las credenciales para ingresar a la plataforma_
+
+_Cuando ingresamos con nuestro usuario administrador vamos a tener la opcion de invitar a alguien para que forme parte de la empresa, le llegara un link al correo donde prodra llenar sus datos basicos_
+
+_Ya que tenemos nuestro usuario invitado y registrado, con nuestro usuario administrador podemos crear un punto de acceso al cual le vamos a crear un horario para el usuario que acabamos de registrar_
+
+_Una vez hemos hecho esto ya podemos comenzar a probar nuestra api, lo primero que haremos sera hacer login para obtener el token de acceso y de actualizacion.Enviamos una peticion POST a la ruta *** localhost:8000/api/token/ *** , con un body en formato JSON con los siguientes elementos:_
+
+```
+{
+	"email":"example@email.com",
+
+	"password":"example password"
+}
+```
+
+_Con el proceso anterior ya tendriamos nuestros 2 token, el de acceso hay que actualizarlo cada 5 minutos, para hacerlo basta con hacer una peticion POST a la ruta *** localhost:8000/api/toke/refresh/ *** con un Body en formato JSON con los siguientes elementos:_
+
+```
+{
+	"refresh":"exampletokenrefres"
+}
+```
+
+_Finalmente podemos hacer la validacion de acceso para un usuario que se ha registrado mediante el link de invitacion, esto lo hacemos mediante una peticion POST a la ruta *** localhost:8000/api/validate\_access/ *** con un Body en formato JSON con los siguientes elementos_
+
+```
+{
+	"acces_point_id":Number
+}
+```
+
+_Es importante mencionar que en esta ultima peticion se requiere que en los headers haya un Key llamado Authorization con un value *** Bearer exampleaccestoken ***_
 
 ## Despliegue 📦
 
