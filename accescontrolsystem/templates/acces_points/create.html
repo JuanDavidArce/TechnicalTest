@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row justify-content-center">
-        <h1>Create acces point</h1>
-    </div>
-    <div class="row justify-content-center">
-        
-        <form action="{% url 'companies:create_acces_point' %}" method="POST">
-            {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
-            <button  type="submit" class="btn-dark">Register!</button>
+    {% if request.user.role == 'adminsitrator' %}
 
-        </form>
-    </div>
+        <div class="row justify-content-center">
+            <h1>Create acces point</h1>
+        </div>
+        <div class="row justify-content-center">
+            
+            <form action="{% url 'companies:create_acces_point' %}" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <button  type="submit" class="btn-dark">Register!</button>
+
+            </form>
+        </div>
+    {% else %}
+    <p>
+        You dont have permission
+    </p>
+    {% endif %}
+    
 {% endblock %}
     

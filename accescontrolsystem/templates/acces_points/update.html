@@ -1,35 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row justify-content-center">
-        <h1>Update Acces point</h1>
-    </div>
+    {% if request.user.role == 'administrator' %}
+        <div class="row justify-content-center">
+            <h1>Update Acces point</h1>
+        </div>
 
-    <div class="row justify-content-center">
-        <form method="POST">
-            {% csrf_token %}
-            <table>
+        <div class="row justify-content-center">
+            <form method="POST">
+                {% csrf_token %}
+                <table>
 
-                {{ form.as_table }}
-            </table>
-            <button  type="submit" value="save" class="btn-success">Update</button>
+                    {{ form.as_table }}
+                </table>
+                <button  type="submit" value="save" class="btn-success">Update</button>
+        
+            </form>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <h1>Update Schedules</h1>
+        </div>
+        <div class="row justify-content-center alert alert-secondary">
+            {% for schedule in schedules %}
+                <div class="col">{{ schedule.user }}</div>
+                <div class="col"> From <strong>{{ schedule.start_time }}</strong></div>
+                <div class="col">To <strong>{{ schedule.ending_time }}</strong></div>
+                <div class="col"><a href="{% url 'companies:updateschedule' schedule.pk %}">Update</a></div>
+                <div class="col"><a href="{% url 'companies:deleteschedule' schedule.pk %}">Delete</a></div>
+                <br>
+                
+            {% endfor %}
+        </div>
     
-        </form>
-    </div>
-    <br>
-    <div class="row justify-content-center">
-        <h1>Update Schedules</h1>
-    </div>
-    <div class="row justify-content-center alert alert-secondary">
-        {% for schedule in schedules %}
-            <div class="col">{{ schedule.user }}</div>
-            <div class="col"> From <strong>{{ schedule.start_time }}</strong></div>
-            <div class="col">To <strong>{{ schedule.ending_time }}</strong></div>
-            <div class="col"><a href="{% url 'companies:updateschedule' schedule.pk %}">Update</a></div>
-            <div class="col"><a href="{% url 'companies:deleteschedule' schedule.pk %}">Delete</a></div>
-            <br>
-              
-        {% endfor %}
-    </div>
+    {% else %}
+            <p>You don't have permission</p>
+    {% endif %}
     
 {% endblock %}
 

@@ -35,7 +35,7 @@ class ValidateAccessSerializer(serializers.Serializer):
         schedules = Schedule.objects.filter(acces_point = acces_point[0],
                                             user = user).filter(start_time__gte = data['time'],
                                                                 ending_time__lte = data['time'])
-        if not schedules:
+        if not schedules or not acces_point[0].is_active:
             thread = threading.Thread(target=send_user_mail, 
                                     args= (acces_point[0].company.administrator,'Unauthorized access attempt',
                                     'emails/unauthorized.html', 

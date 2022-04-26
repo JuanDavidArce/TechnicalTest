@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-
-    {{ object.user}} <br>
-    {{ object.start_time }} <br>
-    {{ object.ending_time }} <br>
-    {{ object.accespoint}} <br>
+    {% if request.user.role == 'adminsitrator' %}
+        {{ object.user}} <br>
+        {{ object.start_time }} <br>
+        {{ object.ending_time }} <br>
+        {{ object.accespoint}} <br>
+    {% else %}
+        <p>
+            You dont have permission
+        </p>
+    {% endif %}
+    
 {% endblock %}
 

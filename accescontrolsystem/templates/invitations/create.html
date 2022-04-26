@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row justify-content-center">
-        <h1>Create Invitation</h1>
-    </div>
-    <div class="row justify-content-center">
-        <form  method="POST">
-            {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
-            <button  type="submit" class="btn-success">Register!</button>
+    {% if request.user.role == 'adminsitrator' %}
+        <div class="row justify-content-center">
+            <h1>Create Invitation</h1>
+        </div>
+        <div class="row justify-content-center">
+            <form  method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <button  type="submit" class="btn-success">Register!</button>
+        
+            </form>
+        </div>      
     
-        </form>
-    </div>      
+       
+    {% else %}
+        <p>
+            You dont have permission
+        </p>
+    {% endif %}
     
 {% endblock %}
