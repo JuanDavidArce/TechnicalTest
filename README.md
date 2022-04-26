@@ -126,7 +126,7 @@ _Con el proceso anterior ya tendriamos nuestros 2 token, el de acceso hay que ac
 
 ```
 {
-	"refresh":"exampletokenrefres"
+	"refresh":"exampletokenrefresh"
 }
 ```
 
