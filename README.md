@@ -114,7 +114,7 @@ _Cuando ingresamos con nuestro usuario administrador vamos a tener la opcion de 
 
 _Ya que tenemos nuestro usuario invitado y registrado, con nuestro usuario administrador podemos crear un punto de acceso al cual le vamos a crear un horario para el usuario que acabamos de registrar_
 
-_Una vez hemos hecho esto ya podemos comenzar a probar nuestra api,para el caso de local ***tenemos un archivo de postman (TechnicalTestLocal.postman\_collection.json)*** el cual podemos importar desde la aplicacion, lo primero que haremos sera hacer login para obtener el token de acceso y de actualizacion.Enviamos una peticion POST a la ruta ***localhost:8000/api/token/*** , con un body en formato JSON con los siguientes elementos:_
+_Una vez hemos hecho esto ya podemos comenzar a probar nuestra api,para el caso de local ***tenemos un archivo de postman (TechnicalTestLocal.postman\_collection.json)*** el cual podemos importar desde la aplicacion y reemplazar los valores por los hayamos creando en el aplicativo, lo primero que haremos sera hacer login para obtener el token de acceso y de actualizacion.Enviamos una peticion POST a la ruta ***localhost:8000/api/token/*** , con un body en formato JSON con los siguientes elementos:_
 
 ```
 {
@@ -159,7 +159,7 @@ password : root1234
 
 ```
 
-_Con este usuario podemos realizar todos los pasos mencionados en el apartado de ***ejecucion***, tambien ***es importante mencionar que contamos con un archivo postman para consultar la api al servidor de aws (TechnicalTestRemote.postman\_collection.json)***_
+_Con este usuario podemos realizar todos los pasos mencionados en el apartado de ***ejecucion***, tambien ***es importante mencionar que contamos con un archivo postman para consultar la api al servidor de aws (TechnicalTestRemote.postman\_collection.json)***, basta con reemplazar los valores que hemos creado en la web y con ello podremos hacer consultas_
 
 ## Notas
 
