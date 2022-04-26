@@ -38,4 +38,4 @@ class ApiAccessControlViewSet(GenericViewSet):
         serializer = ValidateAccessSerializer(data = request.data,context ={'user':user} )
         serializer.is_valid(raise_exception=True)
         acces_point =  AccessPointModelSerializer(serializer.save()).data
-        return Response(data = acces_point, status = status.HTTP_200_OK)
+        return Response(data = {'can_acces':True,'acces_point':acces_point}, status = status.HTTP_200_OK)
