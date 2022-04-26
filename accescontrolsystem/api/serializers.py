@@ -53,7 +53,7 @@ class ValidateAccessSerializer(serializers.Serializer):
 
 
 class AccessPointModelSerializer(serializers.ModelSerializer):
-    """Circle model serializer"""
+    """ArccesPoint model serializer"""
 
     class Meta:
         """Meta class"""
