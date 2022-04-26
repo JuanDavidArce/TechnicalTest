@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% if request.user.role == 'adminsitrator' %}
+    {% if request.user.role == 'administrator' %}
         {{ object.user}} <br>
         {{ object.start_time }} <br>
         {{ object.ending_time }} <br>
