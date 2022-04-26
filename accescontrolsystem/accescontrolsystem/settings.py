@@ -39,12 +39,16 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 THIRD_PART_APPS = [
+    'rest_framework',
+    'rest_framework_simplejwt',
 
 ]
 LOCAL_APPS = [
     'users.apps.UsersConfig',
-    'companies.apps.CompaniesConfig'
+    'companies.apps.CompaniesConfig',
+    'api.apps.ApiConfig'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PART_APPS + LOCAL_APPS
@@ -158,3 +162,14 @@ EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
 EMAIL_PORT = os.environ['EMAIL_PORT']
+
+
+# Rest Framework
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+ 
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+
+}
